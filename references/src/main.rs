@@ -22,14 +22,26 @@
 //     println!("{}", r3);
 // }
 
-// 4.2 Dangling References
+// // 4.2 Dangling References
+// fn main() {
+//     let reference_to_nothing = dangle();
+// }
+//
+// fn dangle() -> &String { // dangle returns a refrence to a String
+//     let s = String::from("hello"); // s is a new String
+//
+//     &s // we return a reference to the String, s
+// } // Here, s goes out of scope, and is dropped. Its memory goes away.
+//   // Danger!
+
+// 4.2 Dangling References Solution
 fn main() {
-    let reference_to_nothing = dangle();
+    let str = no_dangle();
+    println!("{}", str);
 }
 
-fn dangle() -> &String { // dangle returns a refrence to a String
-    let s = String::from("hello"); // s is a new String
+fn no_dangle() -> String {
+    let s = String::from("no dangling!");
 
-    &s // we return a reference to the String, s
-} // Here, s goes out of scope, and is dropped. Its memory goes away.
-  // Danger!
+    s
+}
