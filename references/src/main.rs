@@ -9,11 +9,12 @@
 //     some_string.push_str(", world");
 // }
 
-// 4.2. Example of only one Mutable Reference to a particular piece of data at a time
+// 4.2. Mutable and immutable references cannot exist at the same time
 fn main() {
     let mut s = String::from("hello");
-    let r1 = &mut s;
-    let r2 = &mut s;
+    let r1 = &s; // no problem
+    let r2 = &s; // no problem
+    let r3 = &mut s; // BIG PROBLEM
 
-    println!("{}, {}", r1, r2);
+    println!("{}, {} and {}", r1, r2, r3);
 }
