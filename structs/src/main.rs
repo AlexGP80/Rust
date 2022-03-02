@@ -5,8 +5,12 @@ struct User {
     sign_in_count: u64,
 }
 
+// Tuple structs
 struct Color(u32, u32, u32);
 struct Point(i32, i32, i32);
+
+// Unit-Like Structs
+struct AlwaysEqual;
 
 fn main() {
     let mut user1 = User {
@@ -33,8 +37,14 @@ fn main() {
     //     "USER DATA\n=========\n{}\n{}\n{}\n{}\n",
     //     user1.username, user1.email, user1.active, user1.sign_in_count
     // );
+
+    // Tuple structs
     let black = Color(0, 0, 0);
     let origin = Point(0, 0, 0);
+
+    // Unit-like Structs
+    let subject = AlwaysEqual;
+
 }
 
 fn build_user(email: String, username: String) -> User {
