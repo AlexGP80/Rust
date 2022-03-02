@@ -26,8 +26,21 @@ fn main() {
 
     println!("{}", word);
 
-    non_string_slices()
+    non_string_slices();
 
+    string_slices();
+}
+
+// Example of string slices
+fn string_slices() {
+    let s = String::from("hello world");
+
+    let hello = &s[0..5];
+    let world = &s[6..11];
+
+    // s.clear(); // This line would return an error even though we made s mutable, Because s was borrowed already as immutable
+
+    println!("{} {}", hello, world);
 }
 
 fn non_string_slices() {
