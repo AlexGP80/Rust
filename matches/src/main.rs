@@ -65,6 +65,8 @@ fn main() {
         7 => remove_fancy_hat(),
         _ => (),
     }
+
+    if_let_vs_match();
 }
 
 fn add_fancy_hat() {}
@@ -83,5 +85,14 @@ fn display(x: Option<String>) {
     match x {
         None => println!("None"),
         Some(str) => println!("{}", str),
+    }
+}
+
+// if let vs match
+fn if_let_vs_match() {
+    let config_max = Some(3u8);
+    match config_max {
+        Some(max) => println!("The maximum is configured to be {}", max),
+        _ => (),
     }
 }
