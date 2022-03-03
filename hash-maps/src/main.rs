@@ -21,4 +21,15 @@ fn main() {
     // field_name and field_value are invalid at this point, try using them and see what compiler
     // error you get
     // println!("{}: {}", field_name, field_value);
+
+    // Accessing Values in a Hash Map
+    let team_name = String::from("Real Madrid");
+    if let Some(score) = scores.get(&team_name) {
+        println!("{}: {:?}", team_name, score);
+    }
+
+    // Iterating over each key/value pair in a hash map
+    for (key, value) in &scores {
+        println!("{}: {}", key, value);
+    }
 }
