@@ -41,7 +41,36 @@ fn main() {
     let str_none: Option<String> = None;
     display(str_five);
     display(str_none);
+
+    //Catch-all Patterns and the _ Placeholder
+    let dice_roll = 9;
+    match dice_roll {
+        3 => add_fancy_hat(),
+        7 => remove_fancy_hat(),
+        other => move_player(other),
+    }
+
+    let dice_roll = 4;
+    match dice_roll {
+        3 => add_fancy_hat(),
+        7 => remove_fancy_hat(),
+        _ => reroll(),
+    }
+
+    // if we want that nothing happened if a value other than 3 or 7 is rolled, it would be
+    // like this
+    let dice_roll = 2;
+    match dice_roll {
+        3 => add_fancy_hat(),
+        7 => remove_fancy_hat(),
+        _ => (),
+    }
 }
+
+fn add_fancy_hat() {}
+fn remove_fancy_hat() {}
+fn move_player(num_spaces: u8) {}
+fn reroll() {}
 
 fn plus_one(x: Option<i32>) -> Option<i32> {
     match x {
