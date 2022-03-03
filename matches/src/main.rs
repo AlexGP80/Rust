@@ -27,11 +27,23 @@ fn value_in_cents(coin: &Coin) -> u8 {
     }
 }
 
+fn count_non_quarters_announce_quarter_states(coin: &Coin, count: u8) -> u8 {
+    if let Coin::Quarter(state) = coin {
+        println!("State quarter from {:?}!", state);
+        count
+    } else {
+        count + 1
+    }
+}
+
 fn main() {
+    let mut count = 0;
     let my_coin = Coin::Penny;
     println!("{}", value_in_cents(&my_coin));
+    count = count_non_quarters_announce_quarter_states(&my_coin, count);
     let my_coin = Coin::Quarter(UsState::Alabama);
     println!("{}", value_in_cents(&my_coin));
+    count = count_non_quarters_announce_quarter_states(&my_coin, count);
 
     let five = Some(5);
     let six = plus_one(five);
