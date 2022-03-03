@@ -32,4 +32,27 @@ fn main() {
     println!("{}", value_in_cents(&my_coin));
     let my_coin = Coin::Quarter(UsState::Alabama);
     println!("{}", value_in_cents(&my_coin));
+
+    let five = Some(5);
+    let six = plus_one(five);
+    let none = plus_one(None);
+    let another_six = plus_one(five);
+    let str_five = Some(String::from("five"));
+    let str_none: Option<String> = None;
+    display(str_five);
+    display(str_none);
+}
+
+fn plus_one(x: Option<i32>) -> Option<i32> {
+    match x {
+        None => None,
+        Some(i) => Some(i + 1),
+    }
+}
+
+fn display(x: Option<String>) {
+    match x {
+        None => println!("None"),
+        Some(str) => println!("{}", str),
+    }
 }
