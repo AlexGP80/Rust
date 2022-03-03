@@ -51,12 +51,13 @@ fn serve_order() {
     println!("serve_order()");
 }
 
-pub fn eat_at_restaurant() {
-    // Absolute path
-    crate::front_of_house::hosting::add_to_waitlist();
+use crate::front_of_house::hosting;
+// use self::front_of_house::hosting; // would be the same using a relative path
 
-    // Relative path
-    front_of_house::hosting::add_to_waitlist();
+pub fn eat_at_restaurant() {
+    hosting::add_to_waitlist();
+    hosting::add_to_waitlist();
+    hosting::add_to_waitlist();
 
     // Order a breakfast in the summer with Rye toast
     let mut meal = back_of_house::Breakfast::summer("Rye");
