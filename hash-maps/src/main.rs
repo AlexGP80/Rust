@@ -32,4 +32,26 @@ fn main() {
     for (key, value) in &scores {
         println!("{}: {}", key, value);
     }
+
+    // Updating a Hash Map
+    // Overwriting a Value
+    let mut scores = HashMap::new();
+    scores.insert(String::from("Phoenix Suns"), 128);
+    scores.insert(String::from("Phoenix Suns"), 118);
+    println!("{:?}", scores);
+    // Only inserting a value if the key has no value
+    let mut scores = HashMap::new();
+    scores.insert(String::from("Phoenix Suns"), 118);
+    scores.entry(String::from("New York Knicks")).or_insert(97);
+    scores.entry(String::from("Phoenix Suns")).or_insert(92);
+    println!("{:?}", scores);
+    // Updating a Value Based on the Old Value
+    let text = "hello world wonderful world";
+    let mut map = HashMap::new();
+    // Ojo ponzoña
+    for word in text.split_whitespace() {
+        let count = map.entry(word).or_insert(0);
+        *count += 1;
+    }
+    println!("{:?}", map);
 }
