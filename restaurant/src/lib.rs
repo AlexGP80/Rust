@@ -1,58 +1,12 @@
 #![allow(unused)]
-mod front_of_house {
-    pub mod hosting {
-        pub fn add_to_waitlist() {
-            println!("add_to_waitlist()");
-        }
-        fn seat_at_table() {}
-    }
-    mod serving {
-        fn take_order() {}
-        fn server_order() {}
-        fn take_payment() {}
-    }
-}
-
-mod back_of_house {
-    // If we use pub before a struct definition, we make the struct public, but the struct’s
-    // fields will still be private.
-    pub struct Breakfast {
-        pub toast: String,
-        seasonal_fruit: String,
-    }
-
-    impl Breakfast {
-        pub fn summer(toast: &str) -> Breakfast {
-            Breakfast {
-                toast: String::from(toast),
-                seasonal_fruit: String::from("peaches"),
-            }
-        }
-    }
-
-    // In contrast, if we make an enum public, all of its variants are then public. We only need
-    // the pub before the enum keyword
-    pub enum Appetizer {
-        Soup,
-        Salad,
-    }
-
-    fn fix_incorrect_order() {
-        cook_order();
-        super::serve_order();
-    }
-
-    fn cook_order() {
-        println!("cook_order()");
-    }
-}
+mod front_of_house;
+// pub use crate::back_of_house;
+mod back_of_house;
+pub use crate::front_of_house::hosting;
 
 fn serve_order() {
     println!("serve_order()");
 }
-
-use crate::front_of_house::hosting;
-// use self::front_of_house::hosting; // would be the same using a relative path
 
 pub fn eat_at_restaurant() {
     hosting::add_to_waitlist();
