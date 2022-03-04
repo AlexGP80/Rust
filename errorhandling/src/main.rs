@@ -42,7 +42,7 @@ fn main() {
         println!("Cadena vacía, trolazo.")
     }
 
-    if let Some(c) = last_char_of_first_line("") {
+    if let Some(c) = last_char_of_first_line("\nLa puta que te parió\norco") {
         println!("{:?}", c);
     } else {
         println!("Cadena vacía, trolazo.")
