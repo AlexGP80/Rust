@@ -56,7 +56,7 @@ fn main() {
                 {
                     println!("{}:", &splitted_command[2].to_uppercase());
                     let mut underscore = String::new();
-                    for i in (0..splitted_command[2].len()+1) {
+                    for i in (0..splitted_command[2].len() + 1) {
                         underscore.push('=');
                     }
                     println!("{}", underscore);
