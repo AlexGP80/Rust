@@ -1,6 +1,8 @@
 #![allow(unused)]
 pub trait Summary {
-    fn summarize(&self) -> String;
+    fn summarize(&self) -> String {
+        String::from("(Read more...)")
+    }
 }
 
 pub struct NewsArticle {
