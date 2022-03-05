@@ -1,7 +1,7 @@
-fn largest<T: PartialOrd + Copy>(list: &[T]) -> T {
-    let mut largest = list[0];
+fn largest<T: PartialOrd>(list: &[T]) -> &T {
+    let mut largest = &list[0];
 
-    for &item in list {
+    for item in list {
         if item > largest {
             largest = item;
         }
@@ -20,4 +20,9 @@ fn main() {
 
     let result = largest(&char_list);
     println!("The largest char is {}", result);
+
+    let str_list = vec!["puto", "rolero", "viejo", "grognard"];
+    let result = largest(&str_list);
+    println!("The largest str is {}", result);
+
 }
