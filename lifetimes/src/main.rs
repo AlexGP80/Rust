@@ -1,7 +1,12 @@
 #![allow(unused)]
 
-fn longest(x: &str, y: &str) -> String {
-    String::from("Mockup")
+// Mockup of the longest function, not yet relevant to the example
+fn longest(x: &str, y: &str) -> &str {
+    if x.len() > y.len() {
+        x
+    } else {
+        y
+    }
 }
 
 fn main() {
