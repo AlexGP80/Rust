@@ -1,7 +1,7 @@
 #![allow(unused)]
 
 // Mockup of the longest function, not yet relevant to the example
-fn longest(x: &str, y: &str) -> &str {
+fn longest<'a>(x: &'a str, y: &'a str) -> &'a str {
     if x.len() > y.len() {
         x
     } else {
