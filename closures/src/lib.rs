@@ -79,12 +79,12 @@ mod tests {
     #[test]
     fn call_with_float_values() {
         let mut c = Cacher::new(|a| a);
-        let input1 = "pene";
-        let input2 = "gordo";
+        let input1 = "biggus";
+        let input2 = "dickus";
 
         let v1 = c.value(&input1);
         let v2 = c.value(&input2);
 
-        assert_eq!(*v2, "gordo");
+        assert_eq!(*v2, "dickus");
     }
 }
