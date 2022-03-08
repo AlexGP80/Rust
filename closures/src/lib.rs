@@ -5,19 +5,21 @@ use std::time::Duration;
 
 struct Cacher<'a, T, U, V>
 where
-    T: Fn(&'a U) -> &'a V,
+    T: Fn(&'a U) -> V,
     U: Eq,
     U: Hash,
+    V: Copy,
 {
     calculation: T,
-    values: HashMap<&'a U, &'a V>,
+    values: HashMap<&'a U, V>,
 }
 
 impl<'a, T, U, V> Cacher<'a, T, U, V>
 where
-    T: Fn(&'a U) -> &'a V,
+    T: Fn(&'a U) -> V,
     U: Eq,
     U: Hash,
+    V: Copy,
 {
     fn new(calculation: T) -> Cacher<'a, T, U, V> {
         Cacher {
@@ -26,9 +28,9 @@ where
         }
     }
 
-    fn value(&mut self, arg: &'a U) -> &V {
+    fn value(&mut self, arg: &'a U) -> V {
         match self.values.get(&arg) {
-            Some(v) => v,
+            Some(v) => *v,
             None => {
                 let v = (self.calculation)(arg);
                 self.values.insert(arg, v);
@@ -78,13 +80,13 @@ mod tests {
 
     #[test]
     fn call_with_float_values() {
-        let mut c = Cacher::new(|a| a);
-        let input1 = "biggus";
-        let input2 = "dickus";
+        let mut c = Cacher::new(|a: &String| a.len());
+        let input1 = String::from("Guns N' Roses");
+        let input2 = String::from("Metallica");
 
         let v1 = c.value(&input1);
         let v2 = c.value(&input2);
 
-        assert_eq!(*v2, "dickus");
+        assert_eq!(v2, 9);
     }
 }
