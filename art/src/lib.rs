@@ -1,3 +1,7 @@
+//! # Art
+//!
+//! A library for modeling artistic concepts.
+
 /// Adds one to the number given.
 ///
 /// # Examples
