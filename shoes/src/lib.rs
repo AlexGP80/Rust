@@ -48,6 +48,20 @@ mod tests {
     }
 
     #[test]
+    // 1 * 2 = 2 % 3 == 0?: false
+    // 2 * 3 = 6 % 3 == 0?: true
+    // 3 * 4 = 12 % 3 == 0?: true
+    // 4 * 5 = 20 % 3 == 0?: false
+    fn using_other_iterator_trait_methods() {
+        let sum: u32 = Counter::new()
+            .zip(Counter::new().skip(1))
+            .map(|(a, b)| a * b)
+            .filter(|x| x % 3 == 0)
+            .sum();
+        assert_eq!(18, sum);
+    }
+
+    #[test]
     fn filters_by_size() {
         let shoes = vec![
             Shoe {
