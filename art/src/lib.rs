@@ -4,6 +4,7 @@
 
 pub mod kinds {
     /// The primary colors according to the RYB color model.
+    #[derive(Debug)]
     pub enum PrimaryColor {
         Red,
         Yellow,
@@ -11,6 +12,7 @@ pub mod kinds {
     }
 
     /// The secondary colors according to the RYB color model.
+    #[derive(Debug)]
     pub enum SecondaryColor {
         Orange,
         Green,
