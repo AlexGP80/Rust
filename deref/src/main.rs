@@ -1,3 +1,10 @@
+struct MyBox<T>(T);
+impl<T> MyBox<T> {
+    fn new(x: T) -> MyBox<T> {
+        MyBox(x)
+    }
+}
+
 fn main() {
     let x = 5;
     let y = Box::new(x);
