@@ -18,7 +18,7 @@ impl<T> Deref for MyBox<T> {
 
 fn main() {
     let m = MyBox::new(String::from("Rust"));
-    hello(&(*m)[..]);
+    hello(&m);
 }
 
 fn hello(name: &str) {
