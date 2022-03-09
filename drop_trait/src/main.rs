@@ -13,6 +13,6 @@ fn main() {
         data: String::from("some data"),
     };
     println!("CustomSmartPointers created");
-    c.drop();
+    drop(c);
     print!("CustomSmartPointer dropped before the end of main.");
 }
