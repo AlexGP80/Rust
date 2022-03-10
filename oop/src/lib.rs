@@ -35,6 +35,11 @@ impl AveragedCollection {
     }
 }
 
+pub trait Draw {
+    fn draw(&self);
+}
+
+
 #[cfg(test)]
 mod tests {
     use super::*;
