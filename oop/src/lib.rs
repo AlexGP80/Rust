@@ -75,9 +75,9 @@ impl Draw for SelectBox {
         // code to actually draw a SelectBox
         println!(
             "SelectBox {}x{} with {} options drawn",
-                self.width,
-                self.height,
-                self.options.len(),
+            self.width,
+            self.height,
+            self.options.len(),
         );
     }
 }
