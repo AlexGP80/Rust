@@ -51,7 +51,6 @@ impl Screen {
     }
 }
 
-#[derive(Debug)]
 pub struct Button {
     pub width: u32,
     pub height: u32,
@@ -61,7 +60,25 @@ pub struct Button {
 impl Draw for Button {
     fn draw(&self) {
         // code to actually draw a Button
-        println!("Button {}:{}x{} drawed", self.label, self.width, self.height);
+        println!("Button {}:{}x{} drawn", self.label, self.width, self.height);
+    }
+}
+
+pub struct SelectBox {
+    width: u32,
+    height: u32,
+    options: Vec<String>,
+}
+
+impl Draw for SelectBox {
+    fn draw(&self) {
+        // code to actually draw a SelectBox
+        println!(
+            "SelectBox {}x{} with {} options drawn",
+                self.width,
+                self.height,
+                self.options.len(),
+        );
     }
 }
 
