@@ -25,6 +25,7 @@ fn message_passing() {
     thread::spawn(move || {
         let val = String::from("hi");
         tx.send(val).unwrap();
+        println!("Val is {}", val);
     });
 
     let received = rx.recv().unwrap();
