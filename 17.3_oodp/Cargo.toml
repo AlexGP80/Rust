@@ -1,0 +1,6 @@
+[workspace]
+
+members = [
+  "blog",
+  "blog_main",
+]
