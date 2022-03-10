@@ -1,7 +1,9 @@
 fn main() {
     // threads();
 
-    message_passing();
+    // message_passing();
+
+    mutexes();
 }
 
 fn threads() {
@@ -55,4 +57,17 @@ fn message_passing() {
     for received in rx {
         println!("Got: {}", received);
     }
+}
+
+fn mutexes() {
+    use std::sync::Mutex;
+
+    let m = Mutex::new(5);
+
+    {
+        let mut num = m.lock().unwrap();
+        *num = 6;
+    }
+
+    println!("m = {:?}", m);
 }
