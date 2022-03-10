@@ -51,6 +51,20 @@ impl Screen {
     }
 }
 
+#[derive(Debug)]
+pub struct Button {
+    pub width: u32,
+    pub height: u32,
+    pub label: String,
+}
+
+impl Draw for Button {
+    fn draw(&self) {
+        // code to actually draw a Button
+        println!("Button {}:{}x{} drawed", self.label, self.width, self.height);
+    }
+}
+
 #[cfg(test)]
 mod tests {
     use super::*;
