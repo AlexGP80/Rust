@@ -7,7 +7,7 @@ pub struct Screen {
 }
 
 impl Screen {
-    pub fn rn(&self) {
+    pub fn run(&self) {
         for component in self.components.iter() {
             component.draw();
         }

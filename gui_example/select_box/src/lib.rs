@@ -1,9 +1,9 @@
 use gui::Draw;
 
 pub struct SelectBox {
-    width: u32,
-    height: u32,
-    options: Vec<String>,
+    pub width: u32,
+    pub height: u32,
+    pub options: Vec<String>,
 }
 
 impl Draw for SelectBox {
