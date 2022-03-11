@@ -1,3 +1,4 @@
+/// Post
 pub struct Post {
     state: Option<Box<dyn State>>,
     content: String,
@@ -18,13 +19,39 @@ impl Post {
     pub fn content(&self) -> &str {
         ""
     }
+
+    pub fn request_review(&mut self) {
+        if let Some(s) = self.state.take() {
+            self.state = Some(s.request_review())
+        }
+    }
 }
 
-trait State {}
+/// State (trait)
+trait State {
+    /// Note that rather than having self, &self, or &mut self as the first parameter of the
+    /// method, we have self: Box<Self>. This syntax means __the method is only valid when called__
+    /// __on a Box holding the type__. 
+    fn request_review(self: Box<Self>) -> Box<dyn State>;
+}
 
+/// Draft (implements State)
 struct Draft {}
 
-impl State for Draft {}
+impl State for Draft {
+    fn request_review(self: Box<Self>) -> Box<dyn State> {
+        Box::new(PendingReview {})
+    }
+}
+
+/// PendingReview (implements State)
+struct PendingReview {}
+
+impl State for PendingReview {
+    fn request_review(self: Box<Self>) -> Box<dyn State> {
+        self
+    }
+}
 
 #[cfg(test)]
 mod tests {
