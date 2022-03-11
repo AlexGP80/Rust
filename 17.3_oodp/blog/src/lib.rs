@@ -40,6 +40,11 @@ trait State {
     /// __on a Box holding the type__.
     fn request_review(self: Box<Self>) -> Box<dyn State>;
     fn approve(self: Box<Self>) -> Box<dyn State>;
+
+    /// Default implementation for the content method that returns an empty string slice
+    fn content<'a>(&self, post: &'a Post) -> &'a str {
+        ""
+    }
 }
 
 /// Draft (implements State)
@@ -78,6 +83,10 @@ impl State for Published {
 
     fn approve(self: Box<Self>) -> Box<dyn State> {
         self
+    }
+
+    fn content<'a>(&self, post: &'a Post) -> &'a str {
+        &post.content
     }
 }
 
