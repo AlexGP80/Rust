@@ -13,7 +13,7 @@ impl Post {
     }
 
     pub fn add_text(&mut self, text: &str) {
-        self.content.push_str(text);
+        self.content = self.state.as_ref().unwrap().add_text(&self.content, text);
     }
 
     pub fn content(&self) -> &str {
@@ -52,6 +52,11 @@ trait State {
     fn content<'a>(&self, post: &'a Post) -> &'a str {
         ""
     }
+
+    /// Default implementation for the add_text method that returns the original text as String
+    fn add_text(&self, original_text: &str, text_to_add: &str) -> String {
+        original_text.to_string()
+    }
 }
 
 /// Draft (implements State)
@@ -68,6 +73,10 @@ impl State for Draft {
 
     fn reject(self: Box<Self>) -> Box<dyn State> {
         self
+    }
+
+    fn add_text(&self, original_text: &str, text_to_add: &str) -> String {
+        format!("{}{}", original_text, text_to_add)
     }
 }
 

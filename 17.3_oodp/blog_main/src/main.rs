@@ -9,6 +9,10 @@ fn main() {
     post.request_review();
     assert_eq!("", post.content());
 
+    // This will be ignored because State is PendingReview instead of Draft
+    post.add_text(". This night I'll go to MacDonnald's.");
+    assert_eq!("", post.content());
+
     post.approve();
     assert_eq!("", post.content());
 
@@ -22,5 +26,6 @@ fn main() {
     assert_eq!("", post.content());
 
     post.approve();
+    // Note there should be no text about MacDonnald's
     assert_eq!("I ate a salad for lunch today", post.content());
 }
