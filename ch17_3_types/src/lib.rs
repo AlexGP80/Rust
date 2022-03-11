@@ -26,19 +26,52 @@ impl DraftPost {
     pub fn request_review(self) -> PendingReviewPost {
         PendingReviewPost {
             content: self.content,
+            approvals: 0,
+        }
+    }
+}
+
+pub enum ApprovalResult {
+    PendingReviewPost(PendingReviewPost),
+    Post(Post),
+}
+
+impl ApprovalResult {
+    pub fn into_pending_post(self) -> Option<PendingReviewPost> {
+        use ApprovalResult::*;
+        match self {
+            PendingReviewPost(v) => Some(v),
+            _ => None,
+        }
+    }
+
+    pub fn into_post(self) -> Option<Post> {
+        use ApprovalResult::*;
+        match self {
+            Post(v) => Some(v),
+            _ => None,
         }
     }
 }
 
 pub struct PendingReviewPost {
     content: String,
+    approvals: i32,
 }
 
 impl PendingReviewPost {
-    pub fn approve(self) -> Post {
-        Post {
-            content: self.content,
+    pub fn publish(self) -> ApprovalResult {
+        if self.approvals >= 2 {
+            ApprovalResult::Post(Post {
+                content: self.content,
+            })
+        } else {
+            ApprovalResult::PendingReviewPost(self)
         }
+    }
+
+    pub fn approve(&mut self) {
+        self.approvals += 1;
     }
 
     pub fn reject(self) -> DraftPost {
