@@ -86,6 +86,7 @@ impl State for Published {
     }
 
     fn content<'a>(&self, post: &'a Post) -> &'a str {
+        // why can we access to content field?
         &post.content
     }
 }
