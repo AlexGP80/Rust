@@ -17,7 +17,7 @@ impl Post {
     }
 
     pub fn content(&self) -> &str {
-        ""
+        self.state.as_ref().unwrap().content(self)
     }
 
     pub fn request_review(&mut self) {
@@ -67,7 +67,6 @@ impl State for PendingReview {
         Box::new(Published {})
     }
 }
-
 
 /// Published (implements State)
 struct Published {}
