@@ -49,12 +49,12 @@ trait State {
     fn reject(self: Box<Self>) -> Box<dyn State>;
 
     /// Default implementation for the content method that returns an empty string slice
-    fn content<'a>(&self, post: &'a Post) -> &'a str {
+    fn content<'a>(&self, _: &'a Post) -> &'a str {
         ""
     }
 
     /// Default implementation for the add_text method that returns the original text as String
-    fn add_text(&self, original_text: &str, text_to_add: &str) -> String {
+    fn add_text(&self, original_text: &str, _: &str) -> String {
         original_text.to_string()
     }
 }
