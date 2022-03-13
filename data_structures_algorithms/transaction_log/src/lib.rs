@@ -19,6 +19,7 @@ impl Node {
     }
 }
 
+#[derive(Debug)]
 struct TransactionLog {
     head: SingleLink,
     tail: SingleLink,
@@ -33,6 +34,16 @@ impl TransactionLog {
             length: 0,
         }
     }
+
+    pub fn append(&mut self, value: String) {
+        let new_node = Node::new(value);
+        match self.tail.take() {
+            Some(old_node) => old_node.borrow_mut().next = Some(new_node.clone()),
+            None => self.head = Some(new_node.clone()),
+        };
+        self.length += 1;
+        self.tail = Some(new_node);
+    }
 }
 
 #[cfg(test)]
@@ -45,5 +56,15 @@ mod tests {
         assert_eq!(transaction_log.head, None);
         assert_eq!(transaction_log.tail, None);
         assert_eq!(transaction_log.length, 0);
+    }
+
+    #[test]
+    fn test_append_to_empty() {
+        let mut transaction_log = TransactionLog::new_empty();
+        transaction_log.append("hola".to_string());
+        println!("{:?}", transaction_log);
+        assert_ne!(transaction_log.head, None);
+        assert_ne!(transaction_log.tail, None);
+        assert_eq!(transaction_log.head, transaction_log.tail);
     }
 }
