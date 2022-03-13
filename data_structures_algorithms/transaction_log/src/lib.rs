@@ -44,6 +44,21 @@ impl TransactionLog {
         self.length += 1;
         self.tail = Some(new_node);
     }
+
+    pub fn pop(&mut self) -> Option<String> {
+        match self.head.take() {
+            None => return None,
+            Some(node) => {
+                let node = node.borrow();
+                self.head = node.next.clone();
+                self.length -= 1;
+                if self.head == None {
+                    self.tail = None;
+                }
+                return Some(node.value.clone());
+            }
+        }
+    }
 }
 
 #[cfg(test)]
@@ -81,5 +96,23 @@ mod tests {
         assert_eq!(transaction_log.length, 5);
         assert_eq!(transaction_log.head.unwrap().borrow().value, "1");
         assert_eq!(transaction_log.tail.unwrap().borrow().value, "5");
+    }
+
+    #[test]
+    fn test_pop() {
+        let mut transaction_log = TransactionLog::new_empty();
+        transaction_log.append("1".to_string());
+        transaction_log.append("2".to_string());
+        transaction_log.append("3".to_string());
+        transaction_log.append("4".to_string());
+        transaction_log.append("5".to_string());
+
+        assert_eq!(transaction_log.pop(), Some("1".to_string()));
+        assert_eq!(transaction_log.pop(), Some("2".to_string()));
+        assert_eq!(transaction_log.pop(), Some("3".to_string()));
+        assert_eq!(transaction_log.pop(), Some("4".to_string()));
+        assert_eq!(transaction_log.pop(), Some("5".to_string()));
+        assert_eq!(transaction_log.length, 0);
+        assert_eq!(transaction_log.pop(), None);
     }
 }
