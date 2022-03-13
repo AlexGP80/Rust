@@ -62,9 +62,24 @@ mod tests {
     fn test_append_to_empty() {
         let mut transaction_log = TransactionLog::new_empty();
         transaction_log.append("hola".to_string());
-        println!("{:?}", transaction_log);
         assert_ne!(transaction_log.head, None);
         assert_ne!(transaction_log.tail, None);
         assert_eq!(transaction_log.head, transaction_log.tail);
+    }
+
+    #[test]
+    fn test_append() {
+        let mut transaction_log = TransactionLog::new_empty();
+        transaction_log.append("1".to_string());
+        transaction_log.append("2".to_string());
+        transaction_log.append("3".to_string());
+        transaction_log.append("4".to_string());
+        transaction_log.append("5".to_string());
+
+        assert_ne!(transaction_log.head, None);
+        assert_ne!(transaction_log.tail, None);
+        assert_eq!(transaction_log.length, 5);
+        assert_eq!(transaction_log.head.unwrap().borrow().value, "1");
+        assert_eq!(transaction_log.tail.unwrap().borrow().value, "5");
     }
 }
