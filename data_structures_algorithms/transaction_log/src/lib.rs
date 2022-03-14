@@ -116,8 +116,8 @@ mod tests {
         assert_eq!(transaction_log.pop(), None);
         assert_eq!(transaction_log.pop(), None);
         assert_eq!(transaction_log.pop(), None);
-        assert_ne!(transaction_log.head, None);
-        assert_ne!(transaction_log.tail, None);
+        assert_eq!(transaction_log.head, None);
+        assert_eq!(transaction_log.tail, None);
         assert_eq!(transaction_log.head, transaction_log.tail);
     }
 }
