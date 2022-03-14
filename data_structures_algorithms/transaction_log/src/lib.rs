@@ -114,5 +114,10 @@ mod tests {
         assert_eq!(transaction_log.pop(), Some("5".to_string()));
         assert_eq!(transaction_log.length, 0);
         assert_eq!(transaction_log.pop(), None);
+        assert_eq!(transaction_log.pop(), None);
+        assert_eq!(transaction_log.pop(), None);
+        assert_ne!(transaction_log.head, None);
+        assert_ne!(transaction_log.tail, None);
+        assert_eq!(transaction_log.head, transaction_log.tail);
     }
 }
