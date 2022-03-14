@@ -49,11 +49,11 @@ impl TransactionLog {
         match self.head.take() {
             None => return None,
             Some(node) => {
-                let node = node.borrow();
-                self.head = node.next.clone();
+                let mut node = node.borrow_mut();
+                self.head = node.next.take();
                 self.length -= 1;
                 if self.head == None {
-                    self.tail = None;
+                    self.tail.take();
                 }
                 return Some(node.value.clone());
             }
@@ -112,6 +112,23 @@ mod tests {
         assert_eq!(transaction_log.pop(), Some("3".to_string()));
         assert_eq!(transaction_log.pop(), Some("4".to_string()));
         assert_eq!(transaction_log.pop(), Some("5".to_string()));
+        assert_eq!(transaction_log.length, 0);
+        assert_eq!(transaction_log.pop(), None);
+        assert_eq!(transaction_log.pop(), None);
+        assert_eq!(transaction_log.pop(), None);
+        assert_eq!(transaction_log.head, None);
+        assert_eq!(transaction_log.tail, None);
+        assert_eq!(transaction_log.head, transaction_log.tail);
+        transaction_log.append("5".to_string());
+        transaction_log.append("4".to_string());
+        transaction_log.append("3".to_string());
+        transaction_log.append("2".to_string());
+        transaction_log.append("1".to_string());
+        assert_eq!(transaction_log.pop(), Some("5".to_string()));
+        assert_eq!(transaction_log.pop(), Some("4".to_string()));
+        assert_eq!(transaction_log.pop(), Some("3".to_string()));
+        assert_eq!(transaction_log.pop(), Some("2".to_string()));
+        assert_eq!(transaction_log.pop(), Some("1".to_string()));
         assert_eq!(transaction_log.length, 0);
         assert_eq!(transaction_log.pop(), None);
         assert_eq!(transaction_log.pop(), None);
