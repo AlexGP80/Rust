@@ -20,10 +20,19 @@ impl Node {
 }
 
 #[derive(Debug)]
-struct TransactionLog {
+pub struct TransactionLog {
     head: SingleLink,
     tail: SingleLink,
     pub length: u64,
+}
+
+impl Drop for TransactionLog {
+    fn drop(&mut self) {
+        while let Some(old_head) = self.head.take() {
+            self.head = old_head.borrow_mut().next.take();
+            drop(old_head);
+        }
+    }
 }
 
 impl TransactionLog {
@@ -94,8 +103,14 @@ mod tests {
         assert_ne!(transaction_log.head, None);
         assert_ne!(transaction_log.tail, None);
         assert_eq!(transaction_log.length, 5);
-        assert_eq!(transaction_log.head.unwrap().borrow().value, "1");
-        assert_eq!(transaction_log.tail.unwrap().borrow().value, "5");
+        assert_eq!(
+            transaction_log.head.take().unwrap().borrow().value,
+            "1".to_string()
+        );
+        assert_eq!(
+            transaction_log.tail.take().unwrap().borrow().value,
+            "5".to_string()
+        );
     }
 
     #[test]
@@ -136,5 +151,14 @@ mod tests {
         assert_eq!(transaction_log.head, None);
         assert_eq!(transaction_log.tail, None);
         assert_eq!(transaction_log.head, transaction_log.tail);
+    }
+
+    #[test]
+    fn test_overflow_when_drop_many_items() {
+        let mut transaction_log = TransactionLog::new_empty();
+        for i in 1..1048576 {
+            transaction_log.append(i.to_string());
+        }
+        // println!("{:?}", transaction_log.head);
     }
 }
