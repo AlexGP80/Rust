@@ -3,5 +3,9 @@
 version = 3
 
 [[package]]
+name = "doubly_linked_list"
+version = "0.1.0"
+
+[[package]]
 name = "transaction_log"
 version = "0.1.0"
