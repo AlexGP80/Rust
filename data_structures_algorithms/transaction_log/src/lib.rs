@@ -12,10 +12,7 @@ struct Node {
 impl Node {
     // A nice and short way of creating a new Node
     fn new(value: String) -> Rc<RefCell<Node>> {
-        Rc::new(RefCell::new(Node {
-            value,
-            next: None,
-        }))
+        Rc::new(RefCell::new(Node { value, next: None }))
     }
 }
 
