@@ -1,7 +1,35 @@
 
 
 fn main() {
-    playing_with_options();
+    playing_with_options_2();
+}
+
+
+
+
+fn playing_with_options_2() {
+    use rand::Rng;
+
+    let mut rng = rand::thread_rng();
+
+    type IntOption = Option<i32>;
+
+    let mut int_opt_vec: Vec<IntOption> = Vec::new();
+
+    for _ in 1..1000 {
+        int_opt_vec.push(match rng.gen_range(0..2) {
+            1 => Some(rng.gen_range(0..101)),
+            _ => None,
+        });
+    }
+
+    for i in 0..int_opt_vec.len() {
+        if let Some(number) = int_opt_vec[i] {
+            println!("{}", number)
+        } else {
+            println!("NADA");
+        }
+    }
 }
 
 
