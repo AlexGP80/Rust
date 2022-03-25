@@ -4,20 +4,21 @@ fn main() {
     playing_with_options();
 }
 
-#[derive(Debug)]
-struct Cell {
-    value: String,
-}
-
-impl Cell {
-    fn new(value: String) -> Cell {
-        Cell {
-            value,
-        }
-    }
-}
 
 fn playing_with_options() {
+    #[derive(Debug)]
+    struct Cell {
+        value: String,
+    }
+
+    impl Cell {
+        fn new(value: String) -> Cell {
+            Cell {
+                value,
+            }
+        }
+    }
+
     type CellOption = Option<Cell>;
 
     use rand::Rng;
@@ -41,8 +42,14 @@ fn playing_with_options() {
             let buffer = std::str::from_utf8(&buffer).unwrap();
             str_vec.push(Some(Cell::new(buffer.to_string())));
         }
-
     }
 
-    println!("{:?}", str_vec);
+    for elem in str_vec {
+        match elem {
+            Some(cell) => {
+                println!("{}", cell.value)
+            },
+            None => println!("CACA"),
+        }
+    }
 }
