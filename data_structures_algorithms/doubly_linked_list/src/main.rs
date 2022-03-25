@@ -1,3 +1,9 @@
+use doubly_linked_list::DoublyLinkedList;
+
 fn main() {
-    println!("Hello, world!");
+    let mut doubly_linked_list = DoublyLinkedList::new_empty();
+    for i in 1..100000 {
+        doubly_linked_list.append(i.to_string());
+    }
+    // println!("{:?}", doubly_linked_list);
 }
