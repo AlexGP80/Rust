@@ -1,8 +1,5 @@
 use std::cell::RefCell;
 use std::rc::Rc;
-use std::fmt::Display;
-use std::fmt::Formatter;
-use std::fmt::Result;
 
 type Link = Option<Rc<RefCell<Node>>>;
 
@@ -29,12 +26,6 @@ impl Drop for Node {
         self.next.take();
         println!("Dropping {}", &self.value);
         drop(&self.value);
-    }
-}
-
-impl Display for Node {
-    fn fmt(&self, f: &mut Formatter<'_>) -> Result {
-        write!(f, "{}", self.value)
     }
 }
 
