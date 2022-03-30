@@ -1,6 +1,7 @@
 
 
 fn main() {
+    playing_with_options();
     playing_with_options_2();
 }
 
@@ -56,7 +57,7 @@ fn playing_with_options() {
     let mut str_vec: Vec<CellOption> = Vec::new();
     let vowels = [97, 101, 105, 111, 117];
 
-    for _ in 1..10 {
+    for _ in 1..1000 {
         let mut buffer: [u8; 5] = [0, 0, 0, 0, 0];
 
         for i in 0..buffer.len() {
